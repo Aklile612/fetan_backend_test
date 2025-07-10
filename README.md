@@ -1,8 +1,4 @@
-Got it, Aklile — here's your clean `README.md` **without any emojis**, written professionally:
 
----
-
-````markdown
 # Task Manager API
 
 A simple RESTful backend for a Task Manager system built with **Express.js**, **MongoDB**, and **JWT authentication**.
@@ -29,7 +25,7 @@ This is part of the Fetan System Technology internship test project.
 - **Backend Framework:** Express.js
 - **Database:** MongoDB (Mongoose)
 - **Authentication:** JWT, bcryptjs
-- **Deployment:** Render / Railway
+- **Deployment:** Render 
 - **Others:** dotenv, cors, nodemon
 
 ---
@@ -37,7 +33,7 @@ This is part of the Fetan System Technology internship test project.
 ## Installation
 
 ```bash
-git clone https://github.com/Aklile612/go-task-manager.git
+git clone https://github.com/Aklile612/fetan_backend_test
 cd go-task-manager
 npm install
 ````
@@ -87,4 +83,4 @@ npm run dev
 
 ## Deployed API
 
-Live API: `https://your-deployed-link.onrender.com`
+Live API: `https://fetan-backend-test.onrender.com`
