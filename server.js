@@ -1,11 +1,11 @@
 import dotenv from 'dotenv'
-import dbConnect from './config/db'
-import app from './app'
+import dbConnect from './config/db.js'
+import app from './app.js'
 
 dotenv.config()
 
 
-const port=process.env.port
+const port=process.env.PORT
 
 
 dbConnect()

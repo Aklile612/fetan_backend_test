@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const db_URI = process.env.db_URI
+const db_URI = process.env.DB_URI
 
 const dbConnect= async()=>{
     try {
