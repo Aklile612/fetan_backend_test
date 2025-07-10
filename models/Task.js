@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userTask=new mongoose.schema({
+const userTask=new mongoose.Schema({
     name:{
         type:String,
         required:true,
@@ -11,7 +11,7 @@ const userTask=new mongoose.schema({
         default:"Pending",
     },
     user:{
-        type:mongoose.schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:'user',
         required: true
     }
