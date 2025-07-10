@@ -1,0 +1,25 @@
+import mongoose from "mongoose";
+
+const userTask=new mongoose.schema({
+    name:{
+        type:String,
+        required:true,
+    },
+    status:{
+        type:String,
+        enum:["Pending","Completed"],
+        default:"Pending",
+    },
+    user:{
+        type:mongoose.schema.Types.ObjectId,
+        ref:'user',
+        required: true
+    }
+    },{
+        timestamps:true
+    
+})
+
+const Task = mongoose.model('Task',userTask)
+
+export default Task
