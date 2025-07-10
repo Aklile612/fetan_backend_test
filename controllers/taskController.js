@@ -22,6 +22,38 @@ export const  addTask=async (req,res)=>{
 }
 
 
+
+// get task
+export const getTask=async (req,res)=>{
+  const { page = 1, limit = 5, search = "" } = req.query;
+  const query={
+    user:req.user._id,
+    name:{$regex:search ,$options:"i"}
+  }
+
+
+  try {
+    
+    const totaltasks=await Task.countDocuments(query)
+
+    const tasks=await Task.find(query)
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit))
+      .sort({ createdAt: -1 });
+
+      res.status(StatusCodes.OK).json({
+        total: totaltasks,
+        page: parseInt(page),
+        pages: Math.ceil(totaltasks / limit),
+        tasks,
+      });
+  } catch (error) {
+    console.log(error)
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message:"Please try again, there might be an unknown error on the server",error})
+  }
+}
+
+
 // edit task pending-> finished
 
 export const editTask=async (req,res)=>{
@@ -46,7 +78,7 @@ export const editTask=async (req,res)=>{
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message:"Please try again, there might be an unknown error on the server",error})
   }
 }
-
+// delete a task
 export const deleteTask= async(req,res)=>{
   const id = req.params.id
   try {
