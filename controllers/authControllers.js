@@ -40,18 +40,28 @@ export const loginUser=async (req,res)=>{
         return res.status(StatusCodes.CONFLICT).json({message:"Please enter all the required filed"})
     }
     try {
-        
+        const existingUser= await User.findOne({email})
+
+        if (!existingUser){
+            return res.status(StatusCodes.CONFLICT).json({message:"user Doesn't exists"})
+        }
+        const comparePassword= await bcrypt.compare(password,existingUser.password)
+        if (!comparePassword){
+            return res.status(StatusCodes.UNAUTHORIZED).json({message:"please enter the correct password"})
+        }
+        const token = generateToken(existingUser)
+        return res.status(StatusCodes.OK).json({
+            message: "Loged in successfully",
+            token,
+            user: {
+              id: existingUser._id,
+              name: existingUser.name,
+              email: existingUser.email
+            }
+          });
     } catch (error) {
         console.log(error)
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message:"Please try again, there might be an unknown error on the server",error})
     }
-    const existingUser= await User.findOne({email})
-
-    if (!existingUser){
-        return res.status(StatusCodes.CONFLICT).json({message:"user Doesn't exists"})
-    }
-    const comparePassword= await bcrypt.compare(password,existingUser.password)
-    if (!comparePassword){
-        return res.status(StatusCodes.UNAUTHORIZED).json({message:"please enter the correct password"})
-    }
+    
 }
